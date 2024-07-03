@@ -64,6 +64,7 @@ class PasswordResetOTP(models.Model):
 
 
 class UserProfile(models.Model):
+    id = models.BigAutoField(primary_key=True)
     profile_pic = models.ImageField(
         upload_to='profile_pic', default='default.png')
     user = models.OneToOneField(

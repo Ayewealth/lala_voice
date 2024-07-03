@@ -103,6 +103,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'profile_pic',
             'user',
         ]
+        depth = 1
 
 
 class TranslationRequestSerializer(serializers.ModelSerializer):
