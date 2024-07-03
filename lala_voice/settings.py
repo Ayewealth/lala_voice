@@ -38,7 +38,7 @@ DEBUG = True
 if ENVIRONMENT == "production" or POSTGRES_LOCALLY == True:
     ALLOWED_HOSTS = ['*']
     CSRF_TRUSTED_ORIGINS = [
-        'https://crest-backend.onrender.com/', 'https://crestbackend.up.railway.app',]
+        'https://lala-voice.onrender.com/',]
 else:
     ALLOWED_HOSTS = ["*"]
 
@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
+    'cloudinary_storage',
+    'cloudinary',
 
     # APPS
     'base'
@@ -162,7 +164,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+if ENVIRONMENT == 'production' or POSTGRES_LOCALLY == True:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    RAW_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET')
+}
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -182,6 +196,7 @@ else:
 
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.169:8081",
+    "exp://192.168.0.169:8081",
     "http://localhost:8081",
 ]
 

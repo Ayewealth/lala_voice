@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 import random
 
 # Create your models here.
@@ -90,7 +91,8 @@ class TextToSpeechRequest(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField(blank=True, null=True)
     language = models.CharField(max_length=50, blank=True, null=True)
-    audio_file = models.FileField(upload_to='text_to_speech')
+    audio_file = models.FileField(
+        upload_to='text_to_speech', storage=RawMediaCloudinaryStorage())
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -99,7 +101,8 @@ class TextToSpeechRequest(models.Model):
 
 class SpeechToTextRequest(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    audio_file = models.FileField(upload_to='speech_to_text')
+    audio_file = models.FileField(
+        upload_to='speech_to_text', storage=RawMediaCloudinaryStorage())
     language = models.CharField(max_length=50, blank=True, null=True)
     transcribed_text = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
