@@ -96,6 +96,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = UserProfile
         fields = [
@@ -103,7 +105,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'profile_pic',
             'user',
         ]
-        depth = 1
 
     def update(self, instance, validated_data):
         validated_data.pop('user', None)
