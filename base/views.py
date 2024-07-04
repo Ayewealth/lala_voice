@@ -116,7 +116,7 @@ class SavedPhraseListCreateApiView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return CustomUser.objects.filter(user=self.request.user)
+        return UserProfile.objects.filter(user=self.request.user)
 
 
 class SavedPhraseRetrieveUpdateDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
