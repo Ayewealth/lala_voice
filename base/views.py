@@ -64,6 +64,13 @@ class UserProfileListApiView(generics.ListCreateAPIView):
         return UserProfile.objects.filter(user=self.request.user)
 
 
+class UserProfileRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "pk"
+
+
 class TranslationRequestListCreateApiView(generics.ListCreateAPIView):
     queryset = TranslationRequest.objects.all()
     serializer_class = TranslationRequestSerializer

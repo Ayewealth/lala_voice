@@ -13,6 +13,8 @@ urlpatterns = [
     path("users/<str:pk>/", views.UserDetailApiView.as_view(), name="users-details"),
     path("users-profile/", views.UserProfileListApiView.as_view(),
          name="users-profile"),
+    path("users-profile/<str:pk>", views.UserProfileRetrieveUpdateDestroyView.as_view(),
+         name="users-profile-detail"),
     path("change-password/", views.ChangePasswordView.as_view(),
          name="change-password"),
     path('password-reset/', views.PasswordResetRequestView.as_view(),

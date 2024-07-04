@@ -105,6 +105,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         ]
         depth = 1
 
+    def update(self, instance, validated_data):
+        validated_data.pop('user', None)
+
+        return super().update(instance, validated_data)
+
 
 class TranslationRequestSerializer(serializers.ModelSerializer):
     class Meta:
