@@ -142,14 +142,9 @@ class TextToSpeechRequestSerializer(serializers.ModelSerializer):
 class SpeechToTextRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpeechToTextRequest
-        fields = [
-            "id",
-            "user",
-            "audio_file",
-            "language",
-            "transcribed_text",
-            "timestamp",
-        ]
+        fields = ['id', 'user', 'audio_file',
+                  'language', 'transcribed_text', 'timestamp']
+        read_only_fields = ['id', 'user', 'transcribed_text', 'timestamp']
 
 
 class SavedPhraseSerializer(serializers.ModelSerializer):
