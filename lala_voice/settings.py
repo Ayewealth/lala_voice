@@ -20,7 +20,7 @@ import dj_database_url
 env = Env()
 Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='production')
-POSTGRES_LOCALLY = False
+POSTGRES_LOCALLY = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
